@@ -17,9 +17,5 @@ COPY public ./public
 # Expose the port Cloud Run expects
 EXPOSE 8080
 
-# Copy and setup the startup script
-COPY start.sh ./
-RUN chmod +x start.sh
-
-# Start the server using the script
-CMD ["./start.sh"]
+# Start the server on port 8080
+CMD ["serve", "-s", "public", "-l", "8080"]
