@@ -1,0 +1,20 @@
+{
+  "name": "nutrisense",
+  "version": "1.0.0",
+  "description": "NutriSense — Gemini-powered smart food companion for healthier eating habits",
+  "main": "public/app.js",
+  "type": "module",
+  "scripts": {
+    "test": "node --experimental-vm-modules node_modules/.bin/jest --config jest.config.json",
+    "lint": "eslint public/*.js tests/*.js",
+    "serve": "npx -y serve public -l 3000"
+  },
+  "keywords": ["nutrition", "gemini", "firebase", "health", "ai"],
+  "author": "NutriSense Team",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.56.0",
+    "jest": "^29.7.0",
+    "@jest/globals": "^29.7.0"
+  }
+}

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NutriSense | AI Food Companion</title>
+  <meta name="description" content="NutriSense uses AI to analyze your meals, track habits, and provide contextual nudges to help you reach your health goals.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <main id="main">
+    <!-- View: Home / Onboarding -->
+    <section id="view-home" class="view">
+      <div id="hero-section" class="onboarding-hero">
+        <div class="hero-image">
+           <!-- Placeholder for illustration -->
+           <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%23e0f2f1'/><text x='50' y='50' text-anchor='middle' dy='.3em' font-size='20'>🥗</text></svg>" alt="NutriSense Logo" width="200" height="200">
+        </div>
+        <h1>NutriSense</h1>
+        <p class="text-muted">Your smart, AI-powered food companion.</p>
+        <div style="margin-top: 2rem;">
+          <button id="btn-google-signin" class="btn btn-primary" style="width: 100%;">
+            <i data-lucide="log-in"></i> Sign in with Google
+          </button>
+        </div>
+      </div>
+
+      <!-- Profile Wizard (Hidden initially) -->
+      <div id="profile-wizard" class="card" style="display: none;">
+        <div class="wizard-progress">
+          <div class="progress-dot active" id="dot-1"></div>
+          <div class="progress-dot" id="dot-2"></div>
+          <div class="progress-dot" id="dot-3"></div>
+          <div class="progress-dot" id="dot-4"></div>
+        </div>
+
+        <!-- Step 1 -->
+        <div id="wizard-step-1" class="wizard-step">
+          <h2>Basic Info</h2>
+          <div class="input-group">
+            <label for="profile-name">Name</label>
+            <input type="text" id="profile-name" class="input-control" placeholder="Your Name">
+          </div>
+          <div class="input-group">
+            <label for="profile-age">Age</label>
+            <input type="number" id="profile-age" class="input-control" min="13" max="120" placeholder="e.g., 25">
+          </div>
+          <div class="input-group">
+            <label for="profile-gender">Gender</label>
+            <select id="profile-gender" class="input-control">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Prefer not to say</option>
+            </select>
+          </div>
+          <button class="btn btn-primary btn-next" data-next="2" style="width:100%">Next</button>
+        </div>
+
+        <!-- Step 2 -->
+        <div id="wizard-step-2" class="wizard-step" style="display:none;">
+          <h2>Primary Goal</h2>
+          <div class="goal-grid">
+            <div class="goal-card" data-goal="Lose Weight">
+              <div class="goal-icon">🏃</div>
+              <div>Lose Weight</div>
+            </div>
+            <div class="goal-card" data-goal="Build Muscle">
+              <div class="goal-icon">💪</div>
+              <div>Build Muscle</div>
+            </div>
+            <div class="goal-card" data-goal="Eat Healthier">
+              <div class="goal-icon">🥗</div>
+              <div>Eat Healthier</div>
+            </div>
+            <div class="goal-card" data-goal="Manage Condition">
+              <div class="goal-icon">🩺</div>
+              <div>Manage Condition</div>
+            </div>
+          </div>
+          <div style="display:flex; gap:1rem; margin-top:1.5rem;">
+            <button class="btn btn-outline btn-prev" data-prev="1" style="flex:1">Back</button>
+            <button class="btn btn-primary btn-next" data-next="3" style="flex:1">Next</button>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div id="wizard-step-3" class="wizard-step" style="display:none;">
+          <h2>Dietary Restrictions</h2>
+          <p class="text-muted">Select all that apply.</p>
+          <div class="chips-container" id="restrictions-container">
+            <div class="chip" data-value="Vegetarian">Vegetarian</div>
+            <div class="chip" data-value="Vegan">Vegan</div>
+            <div class="chip" data-value="Gluten-Free">Gluten-Free</div>
+            <div class="chip" data-value="Lactose Intolerant">Lactose Intolerant</div>
+            <div class="chip" data-value="Diabetic">Diabetic</div>
+            <div class="chip" data-value="None">No Restrictions</div>
+          </div>
+          <div style="display:flex; gap:1rem; margin-top:1.5rem;">
+            <button class="btn btn-outline btn-prev" data-prev="2" style="flex:1">Back</button>
+            <button class="btn btn-primary btn-next" data-next="4" style="flex:1">Next</button>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div id="wizard-step-4" class="wizard-step" style="display:none;">
+          <h2>Activity Level</h2>
+          <div class="input-group">
+            <input type="range" id="profile-activity" min="1" max="5" value="3" class="input-control" style="padding:0">
+            <div class="text-center" id="activity-label" style="margin-top:1rem; font-weight:600;">Moderately Active</div>
+          </div>
+          <div style="display:flex; gap:1rem; margin-top:1.5rem;">
+            <button class="btn btn-outline btn-prev" data-prev="3" style="flex:1">Back</button>
+            <button id="btn-finish-wizard" class="btn btn-primary" style="flex:1">Complete</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- View: Scan Meal -->
+    <section id="view-scan" class="view hidden">
+      <h1 class="text-center">Scan Your Meal</h1>
+      <p class="text-center text-muted">Let AI analyze your food.</p>
+      
+      <div id="scan-ui">
+        <div class="scan-cta-container">
+          <input type="file" id="image-upload" accept="image/*" capture="environment" class="hidden">
+          <button id="btn-camera" class="btn btn-primary scan-pulse" style="padding: 24px; font-size: 1.2rem;">
+            <i data-lucide="camera" style="width:32px;height:32px"></i> Take Photo
+          </button>
+          <button id="btn-upload" class="btn btn-outline">
+            <i data-lucide="image"></i> Upload Image
+          </button>
+        </div>
+      </div>
+
+      <div id="scan-preview" class="card hidden">
+        <img id="preview-img" src="" alt="Meal preview" style="width:100%; border-radius:var(--radius-sm); margin-bottom:1rem;">
+        <button id="btn-analyze" class="btn btn-primary" style="width:100%">Analyze Meal</button>
+      </div>
+
+      <div id="scan-loading" class="hidden text-center">
+        <div class="spinner"></div>
+        <p>Gemini is analyzing your meal...</p>
+      </div>
+
+      <div id="scan-result" class="hidden">
+        <div class="card">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+            <h2 id="result-name">Meal Name</h2>
+            <div id="result-health-badge" class="health-badge badge-green">8/10</div>
+          </div>
+          
+          <div class="macro-display">
+            <div class="macro-ring" id="result-ring">
+              <span class="macro-ring-text" id="result-calories">450<br><span style="font-size:0.8rem; font-weight:normal;">kcal</span></span>
+            </div>
+            <div>
+              <div style="color:var(--success)">■ <span id="res-protein">25g</span> Protein</div>
+              <div style="color:var(--warning)">■ <span id="res-carbs">45g</span> Carbs</div>
+              <div style="color:var(--primary)">■ <span id="res-fat">15g</span> Fat</div>
+            </div>
+          </div>
+
+          <div id="result-flags" class="hidden" style="background:#ffebee; color:#c0392b; padding:10px; border-radius:8px; margin-bottom:1rem; font-weight:600;">
+            ⚠️ <span id="res-flag-text"></span>
+          </div>
+
+          <h3>Food Groups</h3>
+          <div class="chips-container" id="result-groups" style="margin-bottom:1rem;"></div>
+
+          <h3>AI Feedback</h3>
+          <p id="result-alignment" style="background:var(--primary-light); padding:10px; border-radius:8px; border-left:4px solid var(--primary);"></p>
+          
+          <h3>Improvements</h3>
+          <ul id="result-improvements" style="padding-left:20px; color:var(--text-muted);"></ul>
+
+          <div style="display:flex; gap:1rem; margin-top:1.5rem;">
+            <button id="btn-scan-again" class="btn btn-outline" style="flex:1">Cancel</button>
+            <button id="btn-log-meal" class="btn btn-primary" style="flex:1">Log Meal</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- View: Dashboard -->
+    <section id="view-dashboard" class="view hidden">
+      <h1>Dashboard</h1>
+      
+      <!-- Nudge Card -->
+      <div class="card nudge-card" id="nudge-container">
+        <div class="nudge-content">
+          <div class="nudge-emoji" id="nudge-icon">✨</div>
+          <div>
+            <div style="font-size:0.8rem; font-weight:bold; color:var(--primary); text-transform:uppercase;">AI Insight</div>
+            <p id="nudge-text" style="margin:0;">Generating your personalized insight...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Today Summary -->
+      <div class="card">
+        <h2>Today</h2>
+        <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem;">
+          <span class="text-muted">Calories</span>
+          <span style="font-weight:bold;"><span id="dash-cal-current">0</span> / <span id="dash-cal-target">2000</span> kcal</span>
+        </div>
+        <div style="height:10px; background:#eee; border-radius:5px; overflow:hidden;">
+          <div id="dash-cal-bar" style="height:100%; width:0%; background:var(--primary); transition:width 1s;"></div>
+        </div>
+        
+        <div class="streak-container" id="dash-streaks">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- Chart -->
+      <div class="card">
+        <h2>Weekly Macros</h2>
+        <div style="height:200px; width:100%;">
+          <canvas id="macroChart"></canvas>
+        </div>
+      </div>
+      
+      <!-- Recent Meals -->
+      <h2>Recent Meals</h2>
+      <div id="recent-meals-list">
+        <!-- Populated by JS -->
+        <p class="text-muted text-center">No meals logged today.</p>
+      </div>
+
+    </section>
+
+    <!-- View: Find Healthy Food -->
+    <section id="view-find" class="view hidden">
+      <h1>Healthy Spots</h1>
+      <p class="text-muted">AI-recommended places based on your goals.</p>
+      
+      <div class="map-container" id="map-container">
+        <!-- Google Maps Embed will go here -->
+      </div>
+      <div class="text-center hidden" id="map-loading" style="padding:2rem;">
+         <div class="spinner"></div><p>Finding your location...</p>
+      </div>
+
+      <div id="restaurant-list">
+        <!-- Populated by JS -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+    <a href="#home" class="nav-item active" id="nav-home">
+      <i data-lucide="home"></i>
+      <span>Home</span>
+    </a>
+    <a href="#scan" class="nav-item" id="nav-scan">
+      <i data-lucide="camera"></i>
+      <span>Scan</span>
+    </a>
+    <a href="#dashboard" class="nav-item" id="nav-dashboard">
+      <i data-lucide="layout-dashboard"></i>
+      <span>Stats</span>
+    </a>
+    <a href="#find" class="nav-item" id="nav-find">
+      <i data-lucide="map-pin"></i>
+      <span>Find</span>
+    </a>
+  </nav>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>lucide.createIcons();</script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <!-- Dynamic Map Script Load will happen in JS -->
+  
+  <script type="module" src="config.js"></script>
+  <script type="module" src="firebase-app.js"></script>
+  <script type="module" src="gemini.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
